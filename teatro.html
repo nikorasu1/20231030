@@ -1,0 +1,94 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Poltrona</title>
+    <script lang="javascript">
+        function clicou(l, c)
+        {
+            //alert("Coluna: " + c + ", Linha: " + l);
+            //alert("polt" + c + "-" + l);
+            
+            if(MeuArray[l][c] == 1)
+            {
+                document.getElementById("polt" + l + "-" + c).setAttribute("src", "img/poltronaoff.png");
+                MeuArray[l][c] = 0;
+            }
+            else
+            {
+                MeuArray[l][c] = 1;
+                document.getElementById("polt" + l + "-" + c).setAttribute("src", "img/poltronaon.png");
+            }
+
+        }
+
+        function contar()
+        {
+            var lin, col, i, cont;
+            cont=0;
+            for (lin=0; lin<15; ++lin)
+            {
+                for(col = 0; col<40; ++col)
+                {
+                    if(lin >= 0 && lin <=4 && MeuArray[lin][col]==1)
+                    {
+                        cont+= 50;
+                        if(MeuArray[lin][col] == 1 && col == 19 || col == 20)
+                        {
+                            cont+= 50/10;
+                        }
+                    }
+                    if(lin >= 5 && lin <=9 && MeuArray[lin][col]==1)
+                    {
+                        cont+= 40;
+                        if(MeuArray[lin][col] == 1 && col == 19 || col == 20)
+                        {
+                            cont+= 40/10;
+                        }
+                    }
+
+                    if(lin >= 10 && lin <=14 && MeuArray[lin][col]==1)
+                    {
+                        cont+= 30;
+                        if(MeuArray[lin][col] == 1 && col == 19 || col == 20)
+                        {
+                            cont+= 30/10;
+                        }
+                    }
+                }
+            }
+            alert("O total dessa bilheteria foi de R$"+cont);
+        }
+    </script>
+</head>
+<body>
+    <img src="img/money.png" width="100" height="100" onclick="contar()">
+    <center>
+    <img src="img/palco.png" width="920" height="400"><br>
+    <script language="javascript">
+        var MeuArray, lin, col, i, k;
+
+        MeuArray = new Array(15)
+        k=0;
+
+        document.write("<table>");
+
+        for(i = 0; i<MeuArray.length; i++)
+        {
+            MeuArray[i] = new Array(40);
+        }
+
+        for (lin = 0; lin < 15; ++lin) 
+        {   
+            document.write("<tr>");
+            
+                for (col = 0; col < 40; col++) 
+                {
+                    document.write("<td>" +  "<img width='30' height='30' src='img/poltronaoff.png' id='polt" + lin + "-" + col + "' onclick='clicou(" + lin + ", " + col + ")'><br>" + "</td>");
+                    k++;
+                }
+            document.write("</tr>");            
+        }
+    </script>
+    </center>
+</body>
+</html>
